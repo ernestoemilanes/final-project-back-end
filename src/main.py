@@ -84,7 +84,8 @@ def handle_user():
     user1 = User(first_name=body['first_name'], email=body['email'], last_name=body['last_name'], password=body['password'])
     db.session.add(user1)
     db.session.commit()
-    return "ALL GREAT", 200
+    access_token = create_access_token(identity=body['email'])
+    return jsonify(access_token=access_token), 200
 @app.route('/user', methods=['GET'])
 @jwt_required
 def handle_hello():
