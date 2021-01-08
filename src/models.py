@@ -24,14 +24,16 @@ class User(db.Model):
 class UserIntake(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, unique=False, nullable=False)
-    product_name = db.Column(db.String(250), unique=False, nullable=False)
+    item_name = db.Column(db.String(250), unique=False, nullable=False)
     nf_calories = db.Column(db.String(250), unique=False, nullable=False)
+    nf_calories_from_fat = db.Column(db.String(250), unique=False, nullable=False)
     nf_protein = db.Column(db.String(250), unique=False, nullable=False)
     nf_fats = db.Column(db.String(250), unique=False, nullable=False)
     nf_saturated_fats = db.Column(db.String(250), unique=False, nullable=False)
     nf_sugars = db.Column(db.String(250), unique=False, nullable=False)
     nf_sodium = db.Column(db.String(250), unique=False, nullable=False)
     nf_dietary_fiber = db.Column(db.String(250), unique=False, nullable=False)
+    
 
     def __repr__(self):
         return '<UserIntake %r>' % self.product_name
