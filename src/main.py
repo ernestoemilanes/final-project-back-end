@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User
+from models import db, User, UserIntake
 #from models import Person
 
 from flask_jwt_extended import (
@@ -87,13 +87,38 @@ def handle_user():
     access_token = create_access_token(identity=body['email'])
     return jsonify(access_token=access_token), 200
 @app.route('/user', methods=['GET'])
-@jwt_required
+# @jwt_required
 def handle_hello():
 
     all_people = User.query.all()
     all_people = list(map(lambda x: x.serialize(), all_people))
     
     return jsonify(all_people), 200
+
+@app.route('/create-intake', methods=['POST'])
+def handle_user_intake():
+
+    # First we get the payload json
+    body = request.get_json()
+
+    if body is None:
+        raise APIException("You need to specify the request body as a json object", status_code=400)
+    # if 'email' not in body:
+    #     raise APIException('You need to specify the email', status_code=400)
+    # if 'first_name' not in body:
+    #     raise APIException('You need to specify the first_name', status_code=400)
+    # if 'last_name' not in body:
+    #     raise APIException('You need to specify the last_name', status_code=400)
+    # if 'password' not in body:
+    #     raise APIException('You need to specify the password', status_code=400)
+
+ 
+    # at this point, all data has been validated, we can proceed to inster into the bd
+    user_intake = UserIntake(user_id=body['user_id'], item_name=body['item_name'], nf_calories=body['nf_calories'], nf_calories_from_fat=body['nf_calories_from_fat'], nf_protein=body['nf_protein'], nf_saturated_fats=body['nf_saturated_fats'], nf_sugars=body['nf_sugars'], nf_sodium=body['nf_sodium'], nf_dietary_fiber=body['nf_dietary_fiber'])
+    db.session.add(user_intake)
+    db.session.commit()
+    access_token = create_access_token(identity=body['user_id'])
+    return jsonify(access_token=access_token), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
