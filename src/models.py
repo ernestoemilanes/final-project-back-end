@@ -34,6 +34,16 @@ class UserIntake(db.Model):
     nf_sugars = db.Column(db.String(250), unique=False, nullable=False)
     nf_sodium = db.Column(db.String(250), unique=False, nullable=False)
     nf_dietary_fiber = db.Column(db.String(250), unique=False, nullable=False)
+    nf_total_fat = db.Column(db.String(250), unique=False, nullable=False)
+    nf_trans_fatty_acid = db.Column(db.String(250), unique=False, nullable=False)
+    nf_cholesterol = db.Column(db.String(250), unique=False, nullable=False)
+    nf_vitamin_a_dv = db.Column(db.String(250), unique=False, nullable=False)
+    nf_vitamin_c_dv = db.Column(db.String(250), unique=False, nullable=False)
+    nf_calcium_dv = db.Column(db.String(250), unique=False, nullable=False)
+    nf_iron_dv = db.Column(db.String(250), unique=False, nullable=False)
+    nf_serving_size_unit = db.Column(db.String(250), unique=False, nullable=False)
+    nf_serving_size_qty = db.Column(db.String(250), unique=False, nullable=False)
+    nf_total_carbohydrate = db.Column(db.String(250), unique=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
     nullable=False)
     
@@ -51,6 +61,17 @@ class UserIntake(db.Model):
             "nf_saturated_fats": self.nf_saturated_fats,
             "nf_sugars": self.nf_sugars,
             "nf_sodium": self.nf_sodium,
-            "nf_dietary_fiber": self.nf_dietary_fiber
+            "nf_dietary_fiber": self.nf_dietary_fiber,
+            "nf_total_fat": self.nf_total_fat,
+            'nf_trans_fatty_acid': self.nf_trans_fatty_acid,
+            'nf_cholesterol': self.nf_cholesterol,
+            'nf_vitamin_a_dv': self.nf_vitamin_a_dv,
+            'nf_vitamin_c_dv' : self.nf_vitamin_c_dv,
+            'nf_calcium_dv': self.nf_calcium_dv,
+            'nf_iron_dv': self.nf_iron_dv,
+            'nf_total_carbohydrate': self.nf_total_carbohydrate,
+            #! still needs in frontend
+            'nf_serving_size_unit': self.nf_serving_size_unit,
+            'nf_serving_size_qty': self.nf_serving_size_qty
             # do not serialize the password, its a security breach
         }
