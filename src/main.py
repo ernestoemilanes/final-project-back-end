@@ -61,7 +61,9 @@ def login():
 
     # Identity can be any data that is json serializable
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token), 200
+    # return jsonify(access_token=access_token), 200
+    response = {'access_token': access_token, 'user': usercheck.serialize()}
+    return jsonify(response), 200
 @app.route('/create-account', methods=['POST'])
 def handle_user():
 
