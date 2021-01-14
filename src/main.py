@@ -116,7 +116,7 @@ def handle_user_intake():
 
  
     # at this point, all data has been validated, we can proceed to inster into the bd
-    user_intake = UserIntake(user_id=body['user_id'], item_name=body['item_name'], nf_calories=body['nf_calories'], nf_calories_from_fat=body['nf_calories_from_fat'], nf_protein=body['nf_protein'], nf_saturated_fats=body['nf_saturated_fats'], nf_sugars=body['nf_sugars'], nf_sodium=body['nf_sodium'], nf_dietary_fiber=body['nf_dietary_fiber'])
+    user_intake = UserIntake(user_id=body['user_id'], item_name=body['item_name'], nf_calories=body['nf_calories'], nf_calories_from_fat=body['nf_calories_from_fat'], nf_protein=body['nf_protein'], nf_saturated_fats=body['nf_saturated_fats'], nf_sugars=body['nf_sugars'], nf_sodium=body['nf_sodium'], nf_dietary_fiber=body['nf_dietary_fiber'], nf_total_fat=body['nf_total_fat'], nf_trans_fatty_acid=body['nf_trans_fatty_acid'], nf_cholesterol=body['nf_cholesterol'], nf_vitamin_a_dv=body['nf_vitamin_a_dv'], nf_vitamin_c_dv=body['nf_vitamin_c_dv'], nf_calcium_dv=body['nf_calcium_dv'], nf_iron_dv=body['nf_iron_dv'], nf_serving_size_unit=body['nf_serving_size_unit'], nf_serving_size_qty=body['nf_serving_size_qty'], nf_total_carbohydrate=body['nf_total_carbohydrate'])
     db.session.add(user_intake)
     db.session.commit()
     access_token = create_access_token(identity=body['user_id'])
